@@ -31,7 +31,7 @@ module Isucon4
       end
 
       def calculate_password_hash(password, salt)
-        password
+        Digest::SHA256.hexdigest "#{password}:#{salt}"
       end
 
       def login_log(succeeded, login, user_id = nil)
