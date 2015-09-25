@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `login` varchar(255) NOT NULL UNIQUE,
   `password_hash` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL
-) DEFAULT CHARSET=utf8;
+) engine = InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `login_log` (
   `id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS `login_log` (
   KEY (ip),
   KEY (succeeded, user_id),
   KEY (succeeded, ip)
-) DEFAULT CHARSET=utf8;
+) engine = InnoDB DEFAULT CHARSET=utf8;
