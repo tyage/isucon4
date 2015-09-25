@@ -22,7 +22,7 @@ module Isucon4
         Thread.current[:isu4_db] ||= Mysql2::Client.new(
           # host: ENV['ISU4_DB_HOST'] || 'localhost',
           socket: '/var/lib/mysql/mysql.sock',
-          port: ENV['ISU4_DB_PORT'] ? ENV['ISU4_DB_PORT'].to_i : nil,
+          # port: ENV['ISU4_DB_PORT'] ? ENV['ISU4_DB_PORT'].to_i : nil,
           username: ENV['ISU4_DB_USER'] || 'root',
           password: ENV['ISU4_DB_PASSWORD'],
           database: ENV['ISU4_DB_NAME'] || 'isu4_qualifier',
@@ -31,8 +31,7 @@ module Isucon4
       end
 
       def calculate_password_hash(password, salt)
-        # Digest::SHA256.hexdigest "#{password}:#{salt}"
-        password
+        Digest::SHA256.hexdigest "#{password}:#{salt}"
       end
 
       def login_log(succeeded, login, user_id = nil)
