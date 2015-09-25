@@ -67,11 +67,7 @@ module Isucon4
           return [nil, :locked]
         end
 
-        if user && user['password_raw'] === password
-          login_log(true, login, user['id'])
-          [user, nil]
-        elsif user && calculate_password_hash(password, user['salt']) == user['password_hash']
-          db.xquery('update users set password_raw = ? where id = ?', password, user['id'])
+        if user && user['password_hash'] === password
           login_log(true, login, user['id'])
           [user, nil]
         elsif user

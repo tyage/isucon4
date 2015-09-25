@@ -34,7 +34,7 @@ sql.puts "INSERT INTO `users` (`id`, `login`, `password_hash`, `salt`) VALUES"
   hash = Digest::SHA256.hexdigest("#{pass}:#{salt}")
 
   sql.print ',' if i > 1
-  sql.puts "(#{i}, '#{user}', SHA2('#{pass}:#{salt}', 256), '#{salt}')"
+  sql.puts "(#{i}, '#{user}', '#{pass}', '#{salt}')"
   tsv.puts "#{i}\t#{user}\t#{pass}\t#{salt}\t#{hash}"
 end
 
